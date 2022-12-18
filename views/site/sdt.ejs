@@ -1,0 +1,112 @@
+<% include ../layout/header.ejs %>
+<!-- END TOPBAR -->
+<!-- START CONTAINER -->
+<div class="page-container row-fluid container-fluid">
+    <!-- SIDEBAR - START -->
+    <% include ../layout/menu.ejs %>
+    <!--  SIDEBAR - END -->
+    <!-- START CONTENT -->
+    <section id="main-content" class=" ">
+        <section class="wrapper main-wrapper row" style=''>
+            <div class='col-xs-12'>
+                <div class="page-title">
+                    <div class="pull-left">
+                        <h1 class="title">
+                            Order List</h1>
+                    </div>
+                    <div class="pull-right hidden-xs">
+
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-lg-12">
+                <section class="box ">
+                    <header class="panel_header">
+                        <h2 class="title pull-left">All Order</h2>
+                        <div class="actions panel_actions pull-right">
+                            <a class="box_toggle fa fa-chevron-down"></a>
+                            <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
+                            <a class="box_close fa fa-times"></a>
+                        </div>
+                                  <div class="sidewidt">
+            <h2 class="heading2"><span>Category product</span></h2>
+            <ul class="nav nav-list categories">
+              <% categories.forEach(function(ca){ %>
+                <li>
+                  <a href="/danh-muc/<%= ca.urlRewriteName %>.<%= ca.id%>.html" ><%= ca.name%></a>
+                </li>
+             
+              <%})%>
+            </ul> 
+          </div>
+                    </header>
+                    <div class="content-body">
+                        <div class="row">
+                           <input class="topinput" id="search-keyword1" name="key" type="text"
+                    placeholder="Tìm kiếm theo số điện thoại....." autocomplete="off" maxlength="50"
+                    style="width: 220px; margin: 4px 60px 0 -15px; margin-left: 10px;" />
+                        </div>
+                        <div class="row">
+                            <% if(response_message){ %>
+                            <div class="alert alert-success"><%= response_message%></div>
+                            <% } %>
+                            <div class="col-xs-12">
+                                <!-- ********************************************** -->
+                                <table id="example" class="display table table-hover table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Phone</th>
+                                            <th>Email</th>
+                                            <th>Total</th>
+                                             <th>Purchase date</th>
+                                            <th>Action</th>
+                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% var id = 0 %>
+                                        <% model.data.forEach(function(item){ id ++%>
+                                            <% if (!item.isDeleted) { %>
+                                            <tr>
+                                                <td><%= id%></td>
+                                                <td><%= item.name%></td>
+                                                <td><%= item.phone%></td>
+                                                <td><%= item.email%></td>
+                                                <td><%= parseInt(item.total).toLocaleString('en-us') %></td>
+                                                <td>
+                                                    <%= moment(item.created_at).format('DD/MM/YYYY') %>
+                                                </td>
+                                                <td>
+                                                    <a href="/admin/order/chi-tiet/<%= item.id %>.html">Detail |</a>
+                                                    <a href="/admin/order/xoa/<%= item.id %>">Delete</a>
+                                                </td>
+
+                                            </tr>
+                                            <% } %>
+                                        <%})%>
+                                    </tbody>
+                                </table>
+                                <!-- ********************************************** -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </section>
+    <!-- END CONTENT -->
+    <div class="chatapi-windows "></div>
+</div>
+  <script type="text/javascript">
+    var input = document.getElementById("search-keyword1");
+
+    input.addEventListener("keyup", function(event) {
+      if (event.keyCode === 13) {
+        window.location.href = '/search.html?keyword=' + input.value;
+      }
+    });
+  </script>
+<% include ../layout/footer.ejs %>

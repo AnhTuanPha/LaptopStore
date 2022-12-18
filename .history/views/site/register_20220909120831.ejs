@@ -1,0 +1,110 @@
+<% include layout/header.ejs %>
+<!-- Header End -->
+
+<div id="maincontainer">
+  <section id="product">
+    <div class="container">
+     <!--  breadcrumb --> 
+      <ul class="breadcrumb">
+        <li>
+          <a href="#">Home/Register</a>
+          
+        </li>
+        
+      </ul>  
+      <!-- Contact Us-->
+      <h1 class="heading1"><span class="maintext" style="color:#009933;">ĐĂNG KÝ</span></h1>
+      <div class="row" >
+        <% if(response_message != ''){ %> 
+            <div class="alert alert-success"><%= response_message%></div>
+        <% } %>
+        <div class="alert alert-danger" style="display: none;"></div>
+        <div class="span9" >
+          
+            <fieldset style="margin-left: 350px;" >
+              <div class="control-group">
+                <label for="fullname" class="control-label">Full name <span class="required">*</span></label>
+                <div class="controls">
+                  <input type="text"  class="required"style="width: 500px;" id="fullname" value="" name="fullname">
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="password" class="control-label">Password<span class="required">*</span></label>
+                <div class="controls">
+                  <input type="password"  class="required password" style="width: 500px;" id="password" value="" name="password">
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="repassword" class="control-label">Enter the password<span class="required">*</span></label>
+                <div class="controls">
+                  <input type="password"  class="required repassword" style="width: 500px;"id="repassword" value="" name="repassword">
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="email" class="control-label">Email <span class="required">*</span></label>
+                <div class="controls">
+                  <input type="email"  class="required email" id="email" style="width: 500px;" value="" name="email">
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="url" class="control-label">Phone</label>
+                <div class="controls">
+                  <input type="text" id="phone" value="" name="phone" style="width: 500px;">
+                </div>
+              </div>
+              <div class="form-actions" style="background-color: white;">
+                <input type="submit" value="Đăng ký" style="background-color: #009933;" class="btn btn-orange" id="register_id"
+                  onclick="onSubmit()">
+                <input class="btn" type="reset" value="Reset">
+              </div>
+            </fieldset>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- chưa hiểu-->
+<script type="text/javascript">
+  function onSubmit() {
+    var postData = {
+      fullname: $('#fullname').val(),
+      email: $('#email').val(),
+      password: $('#password').val(),
+      repassword: $('#repassword').val()
+    };
+
+    $.ajax(
+      {
+        type: 'POST',
+        url: 'http://localhost:3000/dang-ky.html',
+        data: postData,
+        success: function(response){
+          $('.alert-danger').empty();
+
+          var bHasError = false;
+            
+          if (response) {
+            if (response.isSucceed === true) {
+              window.location.href = 'http://localhost:3000';
+            }
+            else if (response.errors) {
+              for (var x of response.errors) {
+                $('.alert-danger').append(`<label>${x.msg}</label>`);
+              }
+
+              bHasError = true;
+            }
+          }
+
+          if (bHasError === true) {
+            $('.alert-danger').show();
+          }
+        }
+      }
+    );
+  }
+</script>
+
+<!-- Footer -->
+<% include layout/footer.ejs %>

@@ -1,0 +1,155 @@
+<% include layout/header.ejs %>
+<!-- Header End -->
+
+<div id="maincontainer">
+  <section id="product">
+    <div class="container">
+     <!--  breadcrumb --> 
+      <ul class="breadcrumb">
+        <li>
+          <a href="#">Home/Shopping Cart</a>
+          
+        </li>
+       
+      </ul>       
+      <h1 class="heading1"><span class="maintext" style="color:#009933;"> Shopping Cart</span><span class="subtext"> Tất cả các mặt hàng trong Giỏ hàng của bạn</span></h1>
+      <!-- Cart-->
+      <div class="cart-info">
+        <table class="table table-striped table-bordered">
+          <tr>
+            <th class="image">Image</th>
+            <th class="name">Product Name</th>
+            <th class="quantity">Amount</th>
+            <th class="total" >Action</th>
+            <th class="price">Price</th>
+            <th class="total">Money</th>
+           
+          </tr>
+          <% var total = 0; if(data){ data.forEach(function(cartItem){ total += cartItem.price %>
+          <tr>
+            <td class="image">
+              <a href="/san-pham/<%= cartItem.item.urlRewriteName%>.<%= cartItem.item.id%>.<%= cartItem.item.categoryId%>.html">
+                <img title="product" alt="product" src="upload/<%= cartItem.item.photo%>" height="50" width="50">
+              </a>
+            </td>
+            <td  class="name">
+              <a href="/san-pham/<%= cartItem.item.urlRewriteName%>.<%= cartItem.item.id%>.<%= cartItem.item.categoryId%>.html">
+                <%= cartItem.item.name%>
+              </a>
+            </td>
+            <td class="quantity">
+              <input id="<%= cartItem.item.id%>" type="text" size="1" value="<%= cartItem.quantity%>" name="quantity[40]" class="txtQuantity-<%= cartItem.item.id%>">
+            </td>
+            <td class="total">
+              <span>
+                <img  class="tooltip-test" id="<%= cartItem.item.id%>" data-original-title="Update" src="img/update.png" alt=""
+                  onclick="onClickUpdate(<%= cartItem.item.id%>)">
+              </span>
+              <span>
+                <img class="tooltip-test" id="<%= cartItem.item.id%>" data-original-title="Remove"  src="img/remove.png" alt=""
+                  onclick="onClickDelete(<%= cartItem.item.id%>)">
+              </span>
+            </td>
+            <td class="price">
+              <% if(cartItem.item.sale > 0) { %>
+              <%= parseInt(cartItem.item.salePrice).toLocaleString('en-us') %> đ
+              <% } else { %>
+              <%= parseInt(cartItem.item.price).toLocaleString('en-us') %> đ
+              <% } %>
+            </td>
+            <td class="total"><%= parseInt(cartItem.price).toLocaleString('en-us') %> đ</td>
+          </tr>
+          <%})}%>
+
+        </table>
+      </div>
+      <div class="container">
+      <div class="pull-right">
+          <div class="span4 pull-right">
+            <table class="table table-striped table-bordered ">
+                <td><span class="extra bold totalamout" style="color: #009933;">Tổng tiền :</span></td>
+                <td><span class="bold totalamout" style="color: #009933;"><%= parseInt(total).toLocaleString('en-us') %> đ</span></td>
+              </tr>
+            </table>
+            <a href="/dat-hang.html" class="btn btn-orange pull-right" style="background-color: #009933;">Order</a>
+            <a href="/" class="btn btn-orange pull-right" style="background-color: #009933;">Back</a>
+          </div>
+        </div>
+        </div>
+    </div>
+  </section>
+  <% if (products !== null && products.length > 0) { %>
+  <!--  Related Products-->
+  <!-- Tạo sản phẩm , giá , tên, giá khuyến mãi -->
+  <section id="related" class="row" style="display: none;">
+    <div class="container">
+      <h1 class="heading1"><span class="maintext">Sản Phẩm Khác</span><span class="subtext"> See Our Most featured Products</span></h1>
+      <ul class="thumbnails">
+        <% products.forEach(function(pro){ %>
+            <li class="span3">
+              <a class="prdocutname" href="product.html"> <%= pro.name %> </a>
+              <div class="thumbnail">
+                <span class="sale tooltip-test">Sale</span>
+                <a href="/san-pham/<%= pro.urlRewriteName%>.<%= pro.id%>.<%= pro.categoryId%>.html"><img alt="" src="upload/<%= pro.photo %>"></a>
+                <div class="pricetag">
+                  <span class="spiral"></span><a href="/cart/add/<%= pro.id %>" class="productcart">ADD TO CART</a>
+                  <div class="price">
+                    <div class="pricenew"><%= parseInt(pro.price).toLocaleString('en-us') %></div>
+                  </div>
+                </div>
+              </div>
+            </li>
+        <% })%>
+      </ul>
+    </div>
+  </section>
+  <% } %>
+</div>
+<script type="text/javascript">
+  function onClickDelete(id) {
+    $.ajax(
+      {
+        type: 'POST',
+        url: 'http://localhost:3000/cart/delete',
+        data: {
+          id
+        },
+        success: function(response){
+          if (!response || response.isSucceed === false) {
+            alert('Cập nhật thất bại');
+          }
+          else {
+            alert('Cập nhật thành công');
+
+            location.reload();
+          }
+        }
+      }
+    );
+  }
+  
+  function onClickUpdate(id) {
+    $.ajax(
+      {
+        type: 'POST',
+        url: 'http://localhost:3000/cart/update',
+        data: {
+          id,
+          quantity: $(`.txtQuantity-${id}`).val()
+        },
+        success: function(response){
+          if (!response || response.isSucceed === false) {
+            alert('Cập nhật thất bại');
+          }
+          else {
+            alert('Cập nhật thành công');
+
+            location.reload();
+          }
+        }
+      }
+    );
+  }
+</script>
+<!-- Footer -->
+<% include layout/footer.ejs %>

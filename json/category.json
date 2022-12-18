@@ -1,0 +1,63 @@
+[{
+  "_id": {
+    "$oid": "60799dc7c2c96719708b475f"
+  },
+  "id": 8,
+  "name": " Mens shirt",
+  "urlRewriteName": "-mens-shirt",
+  "isDeleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60799dd3c2c96719708b4760"
+  },
+  "id": 9,
+  "name": "MALE PANTS",
+  "urlRewriteName": "male-pants",
+  "isDeleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60799de0c2c96719708b4761"
+  },
+  "id": 10,
+  "name": " Men's accessories",
+  "urlRewriteName": "-men's-accessories",
+  "isDeleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6162ac0fe8f08f31644b0a13"
+  },
+  "id": 13,
+  "name": " MEN'S SHOES",
+  "urlRewriteName": "-men's-shoes",
+  "isDeleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6162e33ee8f08f31644b0a1a"
+  },
+  "id": 14,
+  "name": " Áo giáp bảo hộ Komine",
+  "urlRewriteName": "-ao-giap-bao-ho-komine",
+  "isDeleted": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6162e774e8f08f31644b0a1f"
+  },
+  "id": 15,
+  "name": " Gày bảo hộ MOTOR ",
+  "urlRewriteName": "-gay-bao-ho-motor-",
+  "isDeleted": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62e3cdeaaa30fe0559c440d8"
+  }
+},{
+  "_id": {
+    "$oid": "6305d9b8864c29cba164f3cd"
+  }
+}]

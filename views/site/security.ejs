@@ -1,0 +1,231 @@
+<% include layout/header.ejs %>
+<div id="container">
+
+    <div class="overlay-menu" onclick="closeMenu()"></div>
+    
+    <div id="wrapper" class="clearfix">
+        <div class="home-wrapper">
+            <div class="container "  > 
+           
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.657185685294!2d105.7827275148837!3d21.046398585988733!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135abb158a2305d%3A0x5c357d21c785ea3d!2sElectric%20Power%20University!5e0!3m2!1sen!2s!4v1633971433221!5m2!1sen!2s" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div> 
+            <div class="content container mt-5" style="font-size: 14px;">
+                <p class="os">Oakya commits to absolutely keep all Oakya User's information private when using Oakya's software and applications and will not disclose it to third parties unless approved by Oakya. Oakya users or requests from competent state agencies or permitted by law.</p>
+                <hr>
+                <div>
+                    <strong>Privacy Policy</strong>
+                <p>It's not difficult to explain why, even though the store has not been open for a long time, it has attracted a large number of customers to visit, not only to buy goods but also to create intimacy right from the first visit.</p> p>
+
+                <p>Not only that, the store also stands out with its extremely professional service style, applying Oakya's store management software to the order and payment stages, bringing satisfaction to customers. </p>
+                <p>In terms of management, Oakya also helps store owners reduce the burden when ready to provide visual reports on the store's sales, expenses, profits by day, week, month... Support effective inventory control. </p>
+                </div>
+                <div style="height: 3px;width: 100px;background-color: #15D289;margin-top: 50px;"></div>
+                <p>Have you read...</p>
+            </div>
+            </div>
+        </div> 
+    </div>
+</div>
+
+<style type="text/css">
+  #categorymenu {
+    display: none !important;
+  }
+  .text-center{
+         margin-bottom: 100px;
+         padding-bottom: 100px;
+
+         height:100%;
+  }
+</style>
+
+
+<% include layout/footer.ejs %>
+
+<script type="text/javascript">
+    function openMenu() {
+        $('body').css('overflow', 'hidden');
+        $('.overlay-menu').fadeIn(300);
+        $('.menu-mobile').addClass('show');
+    }
+    function closeMenu() {
+        $('body').css('overflow', '');
+        $('.overlay-menu').fadeOut(300);
+        $('.menu-mobile').removeClass('show');
+    }
+    addLoadEvent(function () {
+    });
+</script>
+<script>
+    addLoadEvent(function () {
+        $.ajax({
+            url: '//www.Oakya.vn/blog/api/get_feed?notIn=31',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+               // console.log(data);
+                var container_article = $(".tab-content-news .row");
+                $(".tab-content-news .row").html('');
+                var dataArticle = data.data;
+               // console.log(dataArticle);
+                var i;
+                for (i = 0; i < dataArticle.length; i++) {
+                    if (i >= 3) break;
+                    var item = "<div class='col-xl-4 col-lg-4 col-md-6 col-12 item'>"
+                        + "<div class='news-item'>"
+                        + "<a aria-label='text' href='" + dataArticle[i].alias + "' target='_blank'><img class='news-blog' src='" + dataArticle[i].imageSrc + "' alt='" + dataArticle[i].title + "' data-src='" + dataArticle[i].imageSrc + "'/></a>"
+                        + "<div class='time'>"
+                        + "<i class='fa fa-clock-o'></i> " + dataArticle[i].dateResponse + "</div>"
+                        + "<div class='title'><a href='" + dataArticle[i].alias + "' class='article-title' target='_blank' title='" + dataArticle[i].title + "'>" + dataArticle[i].title + "</a></div>"
+                        + "<div class='continue'><a href='" + dataArticle[i].alias + "' class='article-title' target='_blank' title='" + dataArticle[i].title + "'>Đọc tiếp →</a></div>";
+                    container_article.append(item);
+                }
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    var packagesSwiper;
+
+    addLoadEvent(function () {
+        if (jQuery(window).width() > 767) {
+            if (typeof mySwiper == 'undefined') {
+                packagesSwiper = new Swiper('.slide-reason .swiper-container', {
+                    speed: 500,
+                    loop: false,
+                    slidesPerView: 3,
+                    spaceBetween: 70,
+                    grabCursor: false,
+                    observer: true,
+                    observeParents: true,
+                    touchRatio: 0,
+                    pagination: {
+                        el: '.slide-reason .swiper-pagination',
+                        clickable: true,
+                    },
+                    breakpoints: {
+                        1199: {
+                            slidesPerView: 3,
+                            spaceBetween: 30,
+                            touchRatio: 0,
+                            loop: false,
+                        },
+                        991: {
+                            slidesPerView: 2,
+                            spaceBetween: 40,
+                            touchRatio: 1,
+                            loop: false,
+                        },
+                        767: {
+                            slidesPerView: 1,
+                            spaceBetween: 35,
+                            touchRatio: 1,
+                            loop: false,
+                        }
+                    }
+                });
+            }
+        }
+        else {
+            if (typeof packagesSwiper != 'undefined') {
+                packagesSwiper.destroy();
+                packagesSwiper = undefined;
+                jQuery('.slide-reason .swiper-wrapper').removeAttr('style');
+                jQuery('.slide-reason .swiper-slide').removeAttr('style');
+            }
+            $(".slide-reason .item").click(function () {
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('active');
+                } else {
+                    $(".slide-reason .item").removeClass('active');
+                    $(this).addClass('active');
+                }
+            });
+            var customer = new Swiper('.slide-customer .swiper-container', {
+                speed: 500,
+                loop: false,
+                slidesPerView: 3,
+                spaceBetween: 70,
+                grabCursor: false,
+                observer: true,
+                observeParents: true,
+                touchRatio: 1,
+                pagination: {
+                    el: '.slide-customer .swiper-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    767: {
+                        slidesPerView: 'auto',
+                        spaceBetween: 15,
+                        touchRatio: 1,
+                        centeredSlides: true,
+                        loop: false
+                    }
+                }
+            });
+
+        }
+        var news = new Swiper('.slide-new .swiper-container', {
+            speed: 500,
+            loop: false,
+            slidesPerView: 6,
+            spaceBetween: 0,
+            grabCursor: false,
+            observer: true,
+            observeParents: true,
+            touchRatio: 0,
+            pagination: {
+                el: '.slide-new .swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                1199: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 0,
+                    touchRatio: 0,
+                    slidesPerView: 6,
+                    loop: false,
+                    slidesPerColumn: 1
+                },
+                991: {
+                    slidesPerView: 3,
+                    spaceBetween: 0,
+                    touchRatio: 0,
+                    loop: false,
+                    slidesPerColumn: 2
+                },
+                767: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 30,
+                    touchRatio: 1,
+                    centeredSlides: true,
+                    loop: false
+                }
+            }
+        });
+        $(".scroll-down").click(function () {
+            var a = $(this).attr('data-href');
+            $('html, body').animate({
+                scrollTop: $(a).offset().top
+            }, 500);
+        });
+
+    }); 
+ </script>
+ 
+<script>
+    function openTab(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+</script>

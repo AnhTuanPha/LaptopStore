@@ -1,0 +1,115 @@
+<% include layout/header.ejs %>
+<!-- Header End -->
+  <% if (data && data !== null && data !== undefined) { %>
+  <script type="text/javascript">
+    document.title = '<%= data.name%>';
+  </script>
+  <% } %>}
+<div id="maincontainer">
+  <section id="product">
+    <div class="container">      
+      <!-- Product Details-->
+      <div class="row">
+       <!-- Left Image-->
+        <div class="span5">
+          <ul class="thumbnails mainimage">
+            <li class="span5">
+              <a  rel="position: 'inside' , showTitle: false, adjustX:-4, adjustY:-4" class="thumbnail cloud-zoom" href="upload/<%= data.photo%>">
+                <img src="upload/<%= data.photo%>" alt="" title="" width="350px">
+              </a>
+            </li>
+       
+          </ul>
+       
+        </div>
+         <!-- Right Details-->
+        <div class="span7">
+          <div class="row">
+            <div class="span7">
+              <h1 class="productname"><span class="bgnone" style="color:#009933 ;">
+                <%= data.name%></span></h1>
+        
+              <hr>
+              <h1 class="productname"><span class="bgnone" style="color: black;font-size:16px;">Số lượng: <%= data.sale1 %></span></h1> 
+              <hr>
+              <h1 class="productname"><span class="bgnone" style="color: black;font-size:16px;">Trọng Lượng : &nbsp;&nbsp;&nbsp;   Lớn  &nbsp;&nbsp;&nbsp;  Nhỏ   &nbsp;&nbsp;&nbsp; Trưởng thành</span></h1> 
+
+              <hr>
+              <div class="productprice" style="margin-top: -30px;">
+                <div class="productpageprice" style= "width: 387px;">
+                   <div class="productpageprice" style="display:none ; width: 387px;">
+                    <% if(data.sale > 0) { %>
+                    <span class="spiral"></span><%= data.price%></div>
+                    <span class="1"> </span><h2 style="margin-left:-120px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Giá thú cưng:&nbsp;&nbsp;&nbsp; <%= parseInt(data.salePrice).toLocaleString('en-us') %> đ</h2> </div>
+                    <% } else { %>
+                    <span class="spiral" style="display:none ; "></span><%= data.price%></div>
+                    <% } %>
+                </div>
+              </div>
+              
+
+            
+              <ul class="productpagecart" style="margin-top: 52px; ">
+                <li><a class="cart" href="/cart/add/<%= data.id %>" style= "margin-left: 30px;background-color: #009933; ">THÊM VÀO GIỎ HÀNG</a>
+                </li> 
+              </ul>
+              <!-- Product Description tab & comments-->
+              <div class="productdesc">
+                <ul class="nav nav-tabs" id="myTab">
+                  <li class="active" ><a href="#description" ><h4 style="color: black;">MÔ TẢ CHI TIẾT</h4></a>
+                  </li>
+              
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane active" id="description">
+                    <h2>
+                      Product Details</h2>
+                    <%= data.description%>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <% if (products !== null && products.length > 0) { %>
+  <!--  Related Products-->
+  <section id="related" class="row">
+    <div class="container">
+      <h1 class="heading1"><span class="maintext">Other products</span><span class="subtext"> See Our Most featured Products</span></h1>
+      <ul class="x`">
+        <% products.forEach(function(pro){ %>
+           <li class="span3">
+                        
+                        <div class="thumbnail">
+                          <div class="thumbnail">
+                          <% if(pro.sale > 0) { %>
+                            <span class="tooltip-test" style="background-color: red; color: white; font-size: 20px; z-index: 1000; position: absolute; top: 0; left: 0; padding: 6px 10px;">-<%= pro.sale %>%</span>
+                          <% } %>
+                         <a href="/san-pham/<%= pro.urlRewriteName%>.<%= pro.id%>.<%= pro.categoryId%>.html"><img alt="" src="upload/<%= pro.photo %>" style="font-size:10px ; height : 250px ; "></a>
+
+                          <div class="pricetag" style="background:white;">
+                            <span class="spiral"style="display:none" ></span><a href="/add-cart.<%= pro.id %>" class="productcart" style="display:none">ADD TO CART</a>
+                            <a class="prdocutname" href="product.html" ><b style="color:black ;font-size: 16px ; text-transform: uppercase; text-align: center; margin: 0 0 10px 0; display: block;"><%= pro.name %></b></a>
+                            <div class="price">
+                              <% if(pro.sale > 0) { %>
+                              <div class="pricenew" style="color:red ;float: right; "><%= parseInt(pro.salePrice).toLocaleString('en-us') %> <p style="color:red ;float:right;">đ</p></div>
+                              <div class="pricenew" style="color:black ;float: right; margin-right: 3px;text-decoration: line-through;"><%= parseInt(pro.price).toLocaleString('en-us') %><p style="color:black ;float: right;">đ</p></div>
+                              <% } else { %>
+                              <div class="pricenew" style="color:red ;float: right; margin-right: 12px"><%= parseInt(pro.price).toLocaleString('en-us') %></div>
+                              <% } %>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+        <% })%>
+      </ul>
+    </div>
+  </section>
+  <% } %>
+</div>
+
+<!-- Footer -->
+<% include layout/footer.ejs %>

@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "5f8b0dc2e95f47cdc246dc0a"
+  },
+  "id": 1,
+  "fullname": "Hoàng Minh Duy",
+  "email": "admin@gmail.com",
+  "password": "$2a$16$7DNIJm6ye79xEyWDVwd88uuxZAt4LMkJ9heNIB7PD8zSlADMKFkPu",
+  "roles": [
+    "ADMIN"
+  ],
+  "photo": "1632966584445_anh.jpg"
+},{
+  "_id": {
+    "$oid": "5f9c4510a3de3a0c50c6ea43"
+  },
+  "id": 13,
+  "fullname": "Nguyễn Phương Nam",
+  "email": "phuongnamhd00@gmail.com",
+  "password": "$2a$16$gPTLCKrP6TAcd7.z1nwCV.r24j.Xoiw8Lue/PAKj9ev41h4Bq0lMW",
+  "roles": [
+    "CUSTOMER"
+  ],
+  "__v": 0,
+  "photo": "1632975395878_chon-nghe-2.jpg"
+}]

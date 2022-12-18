@@ -1,0 +1,95 @@
+<% include layout/header.ejs %>
+<!-- Header End -->
+
+<div id="maincontainer">
+  <section id="product">
+    <div class="container">
+     <!--  breadcrumb --> 
+      <ul class="breadcrumb">
+        <li>
+          <a href="/">Home/Contact</a>
+        
+        </li>
+    
+      </ul>  
+      <!-- Contact Us-->
+      <h1 class="heading1"><span class="maintext" style="color:#009933 ;">Contact</span><span class="subtext"> Contact Us for more</span></h1>
+      <div class="row">
+        <% if(response_message != ''){ %> 
+            <div class="alert alert-success"><%= response_message%></div>
+        <% } %>
+        <% if(errors) { %>
+        <div class="alert alert-danger">
+            <% errors.forEach(function(e){ %>
+
+                <%= e.msg %> <br/>
+            <%});%>
+
+        </div>
+        <% };%>
+        <div class="span9">
+          <form class="form-horizontal " action="" method="post" style="margin-left: 180px;">
+            <fieldset>
+              <div class="control-group">
+                <label for="name" class="control-label" > Name <span class="required">*</span></label>
+                <div class="controls">
+                  <input type="text"  class="required" style="width: 500px;" id="name" value="" name="name" required>
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="email" class="control-label">Email <span class="required">*</span></label>
+                <div class="controls">
+                  <input type="email"  class="required email" style="width: 500px;" id="email" value="" name="email" required>
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="url" class="control-label">Phone</label>
+                <div class="controls">
+                  <input type="text" id="phone" value="" style="width: 500px;" name="phone" >
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="message" class="control-label">Message</label>
+                <div class="controls">
+                  <textarea  class="required" rows="6" style="width: 500px;" cols="40" id="message" name="message"></textarea>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label for="url" class="control-label">Ship Address</label>
+                <div class="controls">
+                  <input type="text" id="ship" style="width: 500px;" value="" name="ship" >
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label for="url" class="control-label">Payments</label>
+                <div class="controls">
+                  <select id="payment" name="payment" style="width: 500px;">
+                    <option value="TM">Money</option>
+                    <option value="ATM">Banking-ATM</a></option>
+                  </select>
+                </div>
+                <!-- <a class="" href="/Payment.html">Banking-ATM nhấn vào ở đây</a>-->
+              </div>
+              
+              <div class="form-actions" style="background-color: white;">
+                <input class="btn btn-orange" style="background-color: #009933;" type="submit" value="Submit" id="submit_id">
+                <input class="btn" style="background-color: darkgray;" type="reset" value="Reset">
+                <a href="/gio-hang.html" class="btn btn-orange pull-right" style="background-color: #009933;" Style= "float:left; margin-right:2px;">Back</a>  
+              </div>
+            </fieldset>
+          </form>
+        </div>
+        
+        <!-- Sidebar Start-->
+        
+        <!-- Sidebar End-->
+        
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Footer -->
+<% include layout/footer.ejs %>
